@@ -11,6 +11,7 @@ import android.view.View;
 public class MainActivity extends Activity {
 	
 	private IService myBinder;
+	private MyConn myConn = new MyConn();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +39,12 @@ public class MainActivity extends Activity {
 	public void bind(View view)
 	{
 		Intent intent = new Intent(MainActivity.this,NewService.class);
-		bindService(intent, new MyConn(), BIND_AUTO_CREATE);
+		bindService(intent, myConn, BIND_AUTO_CREATE);
 	}
 	
 	public void unbind(View view)
 	{
-		
+		unbindService(myConn);
 	}
 	
 	private class MyConn implements ServiceConnection{
